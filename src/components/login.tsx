@@ -23,7 +23,6 @@ const Login = () => {
         identifier: JSON.stringify({ email: email }),
         password: password,
       });
-      console.log(resp, "res");
       if (resp?.ok && resp.status === 200) {
         toast.success("Logged in!");
         setLoading(false);
@@ -41,7 +40,6 @@ const Login = () => {
         body: formData,
       });
       const response = await res.json();
-      console.log(response, "......");
       if (response.success) {
         toast.success("Successfully registered!");
         setIsLogin(true);

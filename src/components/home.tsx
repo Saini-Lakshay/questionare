@@ -49,10 +49,8 @@ const HomeComponent = ({}: HomeComponentProps) => {
     setShowModal(true);
   };
   const fetchData = async () => {
-    console.log("............fetch data");
     if (sessionData.data?.user?.email) {
       setLoading(true);
-      console.log("............fetch data inside");
       let formData = new FormData();
       // formData.append("email", sessionData.data?.user?.email);
       const response = await fetch(
@@ -63,7 +61,6 @@ const HomeComponent = ({}: HomeComponentProps) => {
         }
       );
       const jsonResp = await response.json();
-      console.log(jsonResp?.data.questions, "........");
       if (jsonResp.success) {
         setData([...jsonResp?.data?.questions] as any);
       }
@@ -74,8 +71,6 @@ const HomeComponent = ({}: HomeComponentProps) => {
   useEffect(() => {
     fetchData();
   }, [sessionData.status]);
-
-  console.log("session : ", sessionData);
 
   return (
     <div className="h-[100vh] w-full bg-[white] relative">
@@ -178,7 +173,6 @@ const HomeComponent = ({}: HomeComponentProps) => {
                       body: formData,
                     });
                     const response = await res.json();
-                    console.log(response);
                     if (response.success) {
                       toast.success("Added!");
                       fetchData();

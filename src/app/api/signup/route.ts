@@ -10,7 +10,6 @@ export async function POST(request: Request) {
     // const { email, password } = await request.json();
     const email = requestBody.get("email");
     const password = requestBody.get("password");
-    console.log(email, "Email");
     if (!password) {
       return NextResponse.json(
         {
@@ -50,7 +49,6 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log("Error regestering user", error);
     return NextResponse.json(
       {
         success: false,

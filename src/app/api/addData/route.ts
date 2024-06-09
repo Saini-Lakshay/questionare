@@ -8,14 +8,12 @@ export async function POST(request: Request) {
     const requestBody = await request.formData();
     const email = requestBody.get("email");
     const questions = JSON.parse(requestBody.get("questions") as string);
-    console.log("-----------++++++++++++++++++++++ ", questions);
     const existingUserByEmail = await UserModel.findOne({ email });
     if (existingUserByEmail) {
       const updateResp = await UserModel.findByIdAndUpdate(
         existingUserByEmail._id,
         { questions: questions }
       );
-      console.log(updateResp, "..............-----------------");
       return NextResponse.json(
         {
           success: true,
@@ -33,7 +31,6 @@ export async function POST(request: Request) {
       );
     }
   } catch (error) {
-    console.log("Error updating questions", error);
     return NextResponse.json(
       {
         success: false,
